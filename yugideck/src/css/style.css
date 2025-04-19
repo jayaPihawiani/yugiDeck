@@ -1,0 +1,27 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+/* MAINPAGE */
+.main {
+  background-color: #171716;
+}
+/* MAINPAGE */
+
+/* NAVBAR */
+.navbar {
+  padding: 200px;
+}
+.navbar .navbar-brand img {
+  width: 180px;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+}
+/* NAVBAR */
+
+.star {
+  width: 20px;
+}
