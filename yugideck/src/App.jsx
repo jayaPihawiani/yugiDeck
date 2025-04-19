@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBars from "./components/NavBars";
-import Main from "./views/Main";
 import { DataProvider } from "./context/DataContext";
+import Main from "./views/Main";
 
 function App() {
   return (

@@ -7,14 +7,16 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 import yugi from "../assets/image/yugi.png";
 import { DataContext } from "../context/DataContext";
+import { NavLink } from "react-router-dom";
 
 const NavBars = () => {
-  const { setSearch } = useContext(DataContext);
+  const { setSearch, setPaging } = useContext(DataContext);
   const [src, setSrc] = useState("");
 
   const handleSearch = (e) => {
     e.preventDefault();
     setSearch(src);
+    setPaging(0);
   };
 
   return (
@@ -30,12 +32,12 @@ const NavBars = () => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Link href="#action1" className="nav-link">
+            {/* <NavLink to="/" className="nav-link text-light">
               All Cards
-            </Link>
-            <Link href="#action2" className="nav-link">
+            </NavLink>
+            <NavLink to="/type" className="nav-link text-light">
               Link
-            </Link>
+            </NavLink> */}
           </Nav>
           <Form className="d-flex" onSubmit={handleSearch}>
             <Form.Control

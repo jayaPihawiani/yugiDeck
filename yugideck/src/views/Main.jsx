@@ -4,13 +4,14 @@ import ReactPaginate from "react-paginate";
 import star from "../assets/image/star.png";
 import SpinLoading from "../components/SpinLoading";
 import { DataContext } from "../context/DataContext";
+import scrollToTop from "../components/ScrollToTop";
 
 const Main = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState({});
-  const [paginate, setPaginate] = useState({ page: 0, limit: 10, name: "" });
+  const [paginate, setPaginate] = useState({ page: 0, limit: 10 });
   const [loading, setLoading] = useState(false);
-  const { search } = useContext(DataContext);
+  const { search, paging } = useContext(DataContext);
   const [err, setErr] = useState(false);
 
   const getData = async () => {
@@ -33,13 +34,23 @@ const Main = () => {
     }
   };
 
+  useEffect(() => {
+    setPaginate({ ...paginate, page: paging });
+    scrollToTop();
+  }, [search]);
+
   const pageChange = ({ selected }) => {
     setPaginate({ ...paginate, page: selected });
+    scrollToTop();
   };
 
   useEffect(() => {
     getData();
   }, [paginate, search]);
+
+  const setSelect = (e) => {
+    setPaginate({ ...paginate, limit: e.target.value });
+  };
 
   {
     return !err ? (
@@ -50,9 +61,7 @@ const Main = () => {
             <div className="d-flex">
               <select
                 className="mt-5 ms-auto p-2"
-                onChange={(e) =>
-                  setPaginate({ ...paginate, limit: e.target.value })
-                }
+                onChange={(e) => setSelect(e)}
               >
                 <option value="10">10</option>
                 <option value="50">50</option>
@@ -132,7 +141,7 @@ const Main = () => {
                   Total row: {page.total} Page: {page.page + 1} of{" "}
                   {page.totalPages}
                 </p>
-                <nav className="ms-3">
+                <nav className="ms-3" key={page.total}>
                   {page.totalPages && (
                     <ReactPaginate
                       previousLabel={"<"}
