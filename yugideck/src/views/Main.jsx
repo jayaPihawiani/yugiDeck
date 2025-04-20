@@ -68,6 +68,7 @@ const Main = () => {
                 <option value="100">100</option>
               </select>
             </div>
+
             <div className="row row-cols-lg-4 row-cols-md-2 row-cols-1 pt-3">
               {data.map((e) => {
                 return (
@@ -86,7 +87,7 @@ const Main = () => {
                         {e.level && (
                           <p>
                             <span className="fw-bold">Lv</span>:{" "}
-                            {Array.from({ length: e.level }).map((e, index) => (
+                            {Array.from({ length: e.level }).map((_, index) => (
                               <img
                                 src={star}
                                 alt=""
@@ -101,6 +102,7 @@ const Main = () => {
                             <span className="fw-bold">Atk</span>: {`${e.atk}`}
                           </p>
                         )}
+
                         {e.def >= 0 && (
                           <p>
                             <span className="fw-bold">Def</span>: {e.def}
@@ -117,7 +119,7 @@ const Main = () => {
                         <p>
                           <span className="fw-bold">Frame:</span> {e.frameType}
                         </p>
-                        <p>{e.desc}</p>
+                        <p className="fst-italic">{e.desc}</p>
                         <p>
                           <span className="fw-bold">Type:</span>{" "}
                           {e.archetype ? e.archetype : e.type}
@@ -127,8 +129,13 @@ const Main = () => {
                         </p>
                       </div>
                       <div className="card-footer bg-dark text-light">
-                        <span className="fw-bold">Url: </span>
-                        {e.ygoprodeck_url}
+                        <a
+                          href={e.ygoprodeck_url}
+                          target="_blank"
+                          className="text-decoration-none fst-italic"
+                        >
+                          Detail
+                        </a>
                       </div>
                     </div>
                   </div>
